@@ -1,5 +1,5 @@
 import pytest
-from livekit.agents import AgentSession, inference, llm
+from src.livekit.agents import AgentSession, inference, llm
 
 from agent import Assistant
 
