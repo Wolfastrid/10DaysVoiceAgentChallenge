@@ -20,20 +20,21 @@ export interface AppConfig {
 }
 
 export const APP_CONFIG_DEFAULTS: AppConfig = {
-  companyName: 'LiveKit',
-  pageTitle: 'LiveKit Voice Agent',
-  pageDescription: 'A voice agent built with LiveKit',
+  companyName: 'Razorpay SDR',
+  pageTitle: 'AI Sales Development Representative',
+  pageDescription:
+    'Connect with our AI-powered SDR to learn about Razorpay payment solutions and explore how we can help your business.',
 
   supportsChatInput: true,
-  supportsVideoInput: true,
-  supportsScreenShare: true,
+  supportsVideoInput: false,
+  supportsScreenShare: false,
   isPreConnectBufferEnabled: true,
 
   logo: '/lk-logo.svg',
-  accent: '#002cf2',
+  accent: '#2563eb',
   logoDark: '/lk-logo-dark.svg',
-  accentDark: '#1fd5f9',
-  startButtonText: 'Start call',
+  accentDark: '#3b82f6',
+  startButtonText: 'Start Conversation',
 
   // for LiveKit Cloud Sandbox
   sandboxId: undefined,
