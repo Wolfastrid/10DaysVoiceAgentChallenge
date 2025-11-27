@@ -1,4 +1,4 @@
-export interface AppConfig {
+                                                            export interface AppConfig {
   pageTitle: string;
   pageDescription: string;
   companyName: string;
@@ -20,10 +20,10 @@ export interface AppConfig {
 }
 
 export const APP_CONFIG_DEFAULTS: AppConfig = {
-  companyName: 'Razorpay SDR',
-  pageTitle: 'AI Sales Development Representative',
+  companyName: 'SecureBank Fraud Alert',
+  pageTitle: 'Fraud Detection Department',
   pageDescription:
-    'Connect with our AI-powered SDR to learn about Razorpay payment solutions and explore how we can help your business.',
+    "SecureBank Fraud Detection Department - We're calling about a suspicious transaction on your account.",
 
   supportsChatInput: true,
   supportsVideoInput: false,
@@ -31,10 +31,10 @@ export const APP_CONFIG_DEFAULTS: AppConfig = {
   isPreConnectBufferEnabled: true,
 
   logo: '/lk-logo.svg',
-  accent: '#2563eb',
+  accent: '#dc2626',
   logoDark: '/lk-logo-dark.svg',
-  accentDark: '#3b82f6',
-  startButtonText: 'Start Conversation',
+  accentDark: '#ef4444',
+  startButtonText: 'Answer Call',
 
   // for LiveKit Cloud Sandbox
   sandboxId: undefined,

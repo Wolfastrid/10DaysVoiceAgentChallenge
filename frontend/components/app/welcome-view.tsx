@@ -1,4 +1,4 @@
-import { Button } from '@/components/livekit/button';
+  import { Button } from '@/components/livekit/button';
 
 function BookIcon() {
   return (
@@ -99,15 +99,123 @@ function PaymentIcon() {
 interface WelcomeViewProps {
   startButtonText: string;
   onStartCall: () => void;
-  mode?: 'tutor' | 'sdr';
+  mode?: 'tutor' | 'sdr' | 'fraud';
+}
+
+function ShieldIcon() {
+  return (
+    <svg
+      width="64"
+      height="64"
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="mb-4 size-16 text-red-600"
+    >
+      <path
+        d="M32 8L12 16V28C12 40 18 50 32 56C46 50 52 40 52 28V16L32 8Z"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      <path
+        d="M32 24V32"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="32" cy="40" r="2" fill="currentColor" />
+    </svg>
+  );
 }
 
 export const WelcomeView = ({
   startButtonText,
   onStartCall,
-  mode = 'sdr',
+  mode = 'fraud',
   ref,
 }: React.ComponentProps<'div'> & WelcomeViewProps) => {
+  // Fraud Alert Mode Content
+  if (mode === 'fraud') {
+    return (
+      <div ref={ref}>
+        <section className="bg-background flex flex-col items-center justify-center text-center">
+          <ShieldIcon />
+
+          <h1 className="text-foreground mb-2 text-3xl font-bold">SecureBank</h1>
+          <h2 className="text-foreground mb-4 text-xl font-semibold text-red-600">
+            Fraud Detection Department
+          </h2>
+
+          <p className="text-foreground max-w-prose pt-1 leading-6 font-medium">
+            We&apos;ve detected a suspicious transaction on your account and need to verify it with
+            you immediately.
+          </p>
+
+          <div className="mt-6 grid max-w-3xl grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="rounded-lg bg-red-50 p-4">
+              <div className="mb-2 text-2xl">🔒</div>
+              <h3 className="font-semibold text-red-700">Secure Verification</h3>
+              <p className="text-sm text-red-600">
+                We&apos;ll verify your identity using security questions
+              </p>
+            </div>
+            <div className="rounded-lg bg-orange-50 p-4">
+              <div className="mb-2 text-2xl">💳</div>
+              <h3 className="font-semibold text-orange-700">Transaction Review</h3>
+              <p className="text-sm text-orange-600">
+                We&apos;ll review the suspicious transaction details with you
+              </p>
+            </div>
+            <div className="rounded-lg bg-yellow-50 p-4">
+              <div className="mb-2 text-2xl">✅</div>
+              <h3 className="font-semibold text-yellow-700">Quick Resolution</h3>
+              <p className="text-sm text-yellow-600">
+                We&apos;ll take immediate action to protect your account
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-6 max-w-2xl rounded-lg border-2 border-red-200 bg-gradient-to-r from-red-50 to-orange-50 p-4">
+            <h3 className="mb-2 font-semibold text-gray-900">🔐 Security Notice:</h3>
+            <ul className="space-y-1 text-left text-sm text-gray-700">
+              <li>✓ We will NEVER ask for your full card number</li>
+              <li>✓ We will NEVER ask for your PIN or password</li>
+              <li>✓ We will only use security questions to verify your identity</li>
+              <li>✓ This call is to protect your account from fraud</li>
+            </ul>
+          </div>
+
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={onStartCall}
+            className="mt-6 w-64 bg-red-600 font-mono hover:bg-red-700"
+          >
+            {startButtonText}
+          </Button>
+        </section>
+
+        <div className="fixed bottom-5 left-0 flex w-full items-center justify-center">
+          <p className="text-muted-foreground max-w-prose pt-1 text-xs leading-5 font-normal text-pretty md:text-sm">
+            Powered by LiveKit Voice AI •{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://livekit.io"
+              className="underline"
+            >
+              SecureBank Fraud Protection
+            </a>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   // SDR Mode Content
   if (mode === 'sdr') {
     return (
@@ -117,12 +225,12 @@ export const WelcomeView = ({
 
           <h1 className="text-foreground mb-2 text-3xl font-bold">Razorpay</h1>
           <h2 className="text-foreground mb-4 text-xl font-semibold text-blue-600">
-            India's Leading Payment Gateway
+            India&apos;s Leading Payment Gateway
           </h2>
 
           <p className="text-foreground max-w-prose pt-1 leading-6 font-medium">
-            Connect with our AI-powered Sales Development Representative to learn about Razorpay's
-            payment solutions and explore how we can help your business grow.
+            Connect with our AI-powered Sales Development Representative to learn about
+            Razorpay&apos;s payment solutions and explore how we can help your business grow.
           </p>
 
           <div className="mt-6 grid max-w-3xl grid-cols-1 gap-4 md:grid-cols-3">
@@ -149,10 +257,10 @@ export const WelcomeView = ({
             </div>
           </div>
 
-          <div className="mt-6 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 p-4 max-w-2xl">
-            <h3 className="font-semibold text-gray-900 mb-2">What to Expect:</h3>
-            <ul className="text-sm text-gray-700 space-y-1 text-left">
-              <li>✓ Learn about Razorpay's products and pricing</li>
+          <div className="mt-6 max-w-2xl rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 p-4">
+            <h3 className="mb-2 font-semibold text-gray-900">What to Expect:</h3>
+            <ul className="space-y-1 text-left text-sm text-gray-700">
+              <li>✓ Learn about Razorpay&apos;s products and pricing</li>
               <li>✓ Get answers to your payment solution questions</li>
               <li>✓ Share your business needs and use case</li>
               <li>✓ Receive personalized recommendations</li>

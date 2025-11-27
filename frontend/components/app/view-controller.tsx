@@ -1,14 +1,16 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
+import { FraudSessionView } from '@/components/app/fraud-session-view';
+import { SDRSessionView } from '@/components/app/sdr-session-view';
 import { useSession } from '@/components/app/session-provider';
 import { TutorSessionView } from '@/components/app/tutor-session-view';
-import { SDRSessionView } from '@/components/app/sdr-session-view';
 import { WelcomeView } from '@/components/app/welcome-view';
 
 const MotionWelcomeView = motion.create(WelcomeView);
 const MotionTutorSessionView = motion.create(TutorSessionView);
 const MotionSDRSessionView = motion.create(SDRSessionView);
+const MotionFraudSessionView = motion.create(FraudSessionView);
 
 const VIEW_MOTION_PROPS = {
   variants: {
@@ -31,8 +33,9 @@ export function ViewController() {
   const { appConfig, isSessionActive, startSession } = useSession();
 
   // Determine which session view to show based on app config
+  const isFraudMode = appConfig.companyName === 'SecureBank Fraud Alert';
   const isSDRMode = appConfig.companyName === 'Razorpay SDR';
-  const mode = isSDRMode ? 'sdr' : 'tutor';
+  const mode = isFraudMode ? 'fraud' : isSDRMode ? 'sdr' : 'tutor';
 
   return (
     <AnimatePresence mode="wait">
@@ -46,16 +49,20 @@ export function ViewController() {
           mode={mode}
         />
       )}
-      {/* SDR session view */}
-      {isSessionActive && isSDRMode && (
-        <MotionSDRSessionView
-          key="sdr-session-view"
+      {/* Fraud Alert session view */}
+      {isSessionActive && isFraudMode && (
+        <MotionFraudSessionView
+          key="fraud-session-view"
           {...VIEW_MOTION_PROPS}
           appConfig={appConfig}
         />
       )}
+      {/* SDR session view */}
+      {isSessionActive && isSDRMode && (
+        <MotionSDRSessionView key="sdr-session-view" {...VIEW_MOTION_PROPS} appConfig={appConfig} />
+      )}
       {/* Tutor session view */}
-      {isSessionActive && !isSDRMode && (
+      {isSessionActive && !isFraudMode && !isSDRMode && (
         <MotionTutorSessionView
           key="tutor-session-view"
           {...VIEW_MOTION_PROPS}
