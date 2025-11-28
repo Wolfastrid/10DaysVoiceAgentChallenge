@@ -1,10 +1,10 @@
-'use client';
+ 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import type { AppConfig } from '@/app-config';
 import { ChatTranscript } from '@/components/app/chat-transcript';
-import { CoffeeOrderDisplay } from '@/components/app/coffee-order-display';
+import { FoodOrderDisplay } from '@/components/app/food_order_display';
 import { PreConnectMessage } from '@/components/app/preconnect-message';
 import { TileLayout } from '@/components/app/tile-layout';
 import {
@@ -31,13 +31,12 @@ const BOTTOM_VIEW_MOTION_PROPS = {
       translateY: '100%',
     },
   },
-  initial: 'hidden',
-  animate: 'visible',
-  exit: 'hidden',
+  initial: 'hidden' as const,
+  animate: 'visible' as const,
+  exit: 'hidden' as const,
   transition: {
     duration: 0.3,
     delay: 0.5,
-    ease: 'easeOut',
   },
 };
 
@@ -93,9 +92,9 @@ export const SessionView = ({
 
   return (
     <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
-      {/* Coffee Order Display */}
+      {/* Food Order Display */}
       <div className="fixed top-4 right-4 z-40 max-w-sm md:max-w-md lg:max-w-lg">
-        <CoffeeOrderDisplay className="transform scale-90 md:scale-100" />
+        <FoodOrderDisplay className="scale-90 transform md:scale-100" />
       </div>
 
       {/* Chat Transcript */}
