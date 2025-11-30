@@ -8,6 +8,9 @@ import '@/styles/globals.css';
 const publicSans = Public_Sans({
   variable: '--font-public-sans',
   subsets: ['latin'],
+  display: 'swap',
+  fallback: ['system-ui', 'arial'],
+  preload: true,
 });
 
 const commitMono = localFont({
@@ -59,8 +62,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     >
       <head>
         {styles && <style>{styles}</style>}
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
         <ApplyThemeScript />
       </head>
       <body className="overflow-x-hidden">
